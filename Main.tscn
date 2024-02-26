@@ -1,0 +1,129 @@
+[gd_scene load_steps=3 format=3 uid="uid://by0cu6nh8knd"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_ph6pp"]
+[ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="2_5ico3"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ph6pp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 640.0
+theme = ExtResource("2_5ico3")
+color = Color(0.745098, 1, 1, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer" type="Control" parent="ColorRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerContainer" type="MarginContainer" parent="ColorRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_left = 30
+
+[node name="PlayerChoiceLabel" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/PlayerContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Player choice"
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="ColorRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatisticsContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatisticsLabel1" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer2/StatisticsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_5ico3")
+text = "Winning Rate:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatisticsLabel2" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer2/StatisticsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Winning Counts:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultContainer" type="CenterContainer" parent="ColorRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ResultLabel" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Result"
+
+[node name="PlayerChoose" type="HBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="RockButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+text = "Rock"
+
+[node name="PaperButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+text = "Paper"
+
+[node name="ScissorsButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+text = "Scissors"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer" type="Control" parent="ColorRect/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EnemyContainer" type="MarginContainer" parent="ColorRect/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="EnemyChoiceLabel" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer3/EnemyContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Enemy Choice"
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="ColorRect/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose/RockButton" to="." method="press_choice" binds= [0]]
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose/PaperButton" to="." method="press_choice" binds= [0]]
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose/ScissorsButton" to="." method="press_choice" binds= [2]]
