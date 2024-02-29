@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="rock–paper–scissors"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://Index.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [rendering]
 

@@ -46,7 +46,7 @@ script = ExtResource("1_ph6pp")
 offset_right = 1152.0
 offset_bottom = 640.0
 theme = ExtResource("2_5ico3")
-color = Color(0.745098, 1, 1, 1)
+color = Color(0.698039, 1, 1, 1)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
 layout_mode = 0
@@ -73,10 +73,10 @@ theme_override_constants/margin_bottom = 30
 [node name="PlayerChoiceTexture" type="TextureRect" parent="ColorRect/HBoxContainer/VBoxContainer/PlayerContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("4_fojvn")
+texture = ExtResource("4_2kycb")
 expand_mode = 2
 
-[node name="PlayerLoadAnim" type="AnimationPlayer" parent="ColorRect/HBoxContainer/VBoxContainer/PlayerContainer"]
+[node name="LoadAnim" type="AnimationPlayer" parent="ColorRect/HBoxContainer/VBoxContainer/PlayerContainer"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_1utep")
@@ -116,12 +116,25 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="ResultTexture" type="TextureRect" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
 [node name="ResultLoadTimer" type="Timer" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer"]
 unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer"]
+layout_mode = 2
+
+[node name="ResultTexture" type="TextureRect" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+expand_mode = 5
+stretch_mode = 5
+
+[node name="RestartButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Restart!"
 
 [node name="PlayerChoose" type="HBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -170,15 +183,16 @@ theme_override_constants/margin_bottom = 30
 [node name="EnemyChoiceTexture" type="TextureRect" parent="ColorRect/HBoxContainer/VBoxContainer3/EnemyContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("3_n8b5q")
+texture = ExtResource("4_fojvn")
 expand_mode = 2
 
 [node name="Spacer2" type="Control" parent="ColorRect/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[connection signal="animation_finished" from="ColorRect/HBoxContainer/VBoxContainer/PlayerContainer/PlayerLoadAnim" to="." method="_on_player_load_anim_animation_finished"]
+[connection signal="animation_finished" from="ColorRect/HBoxContainer/VBoxContainer/PlayerContainer/LoadAnim" to="." method="_on_player_load_anim_animation_finished"]
 [connection signal="timeout" from="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer/ResultLoadTimer" to="." method="_on_result_load_timer_timeout"]
+[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose/RockButton" to="." method="press_choice" binds= [0]]
 [connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose/PaperButton" to="." method="press_choice" binds= [1]]
 [connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose/ScissorsButton" to="." method="press_choice" binds= [2]]
