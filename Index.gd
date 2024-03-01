@@ -4,16 +4,12 @@ extends Node2D
 @onready var one_button = $ColorRect/VBoxContainer/HBoxContainer/OneButton
 @onready var two_button = $ColorRect/VBoxContainer/HBoxContainer/TwoButton
 @onready var three_button = $ColorRect/VBoxContainer/HBoxContainer/ThreeButton
+@onready var network_status_label = %NetworkStatusLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	game_win_mode_label.hide()
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func _on_button_pressed():
 	get_tree().change_scene_to_file("res://Main.tscn")

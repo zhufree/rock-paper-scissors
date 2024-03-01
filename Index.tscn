@@ -74,6 +74,14 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 54
 text = "Play!"
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="NetworkStatusLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="ColorRect/VBoxContainer/HBoxContainer/OneButton" to="." method="_on_one_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/HBoxContainer/TwoButton" to="." method="_on_two_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/HBoxContainer/ThreeButton" to="." method="_on_three_button_pressed"]
