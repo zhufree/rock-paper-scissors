@@ -74,15 +74,44 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 54
 text = "Play!"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="NetworkStatusLabel" type="Label" parent="CanvasLayer"]
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect"]
 unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -100.0
+offset_right = 200.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/PanelContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="CreatLobbyButton" type="Button" parent="ColorRect/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Create a lobby"
+
+[node name="JoinLobbyButton" type="Button" parent="ColorRect/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Join a Lobby"
 
 [connection signal="pressed" from="ColorRect/VBoxContainer/HBoxContainer/OneButton" to="." method="_on_one_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/HBoxContainer/TwoButton" to="." method="_on_two_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/HBoxContainer/ThreeButton" to="." method="_on_three_button_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/PlayButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/CenterContainer/VBoxContainer/CreatLobbyButton" to="." method="_on_creat_lobby_button_pressed"]
+[connection signal="pressed" from="ColorRect/PanelContainer/CenterContainer/VBoxContainer/JoinLobbyButton" to="." method="_on_join_lobby_button_pressed"]

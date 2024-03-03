@@ -82,9 +82,15 @@ libraries = {
 "": SubResource("AnimationLibrary_1utep")
 }
 
-[node name="Spacer2" type="Control" parent="ColorRect/HBoxContainer/VBoxContainer"]
+[node name="PlayerInfoContainer" type="MarginContainer" parent="ColorRect/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="PlayerInfoLabel" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/PlayerInfoContainer"]
+layout_mode = 2
+text = "Player"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
@@ -94,12 +100,12 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="StatisticsLabel1" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer2/StatisticsContainer"]
+[node name="LobbyLabel" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer2/StatisticsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_5ico3")
-text = "Winning Rate:"
+text = "Lobby"
 horizontal_alignment = 1
 vertical_alignment = 1
 

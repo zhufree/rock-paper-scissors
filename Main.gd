@@ -34,25 +34,14 @@ var current_player_choice = -1
 @onready var result_load_timer = %ResultLoadTimer
 
 @onready var result_texture = %ResultTexture
-@onready var statistics_label_1 = %StatisticsLabel1
+@onready var LobbyLabel = %LobbyLabel
 @onready var statistics_label_2 = %StatisticsLabel2
 @onready var restart_button = %RestartButton
 
 
 func _ready():
-	get_tree().connect("network_peer_connected", Callable(self, "_on_peer_connected"))
-	get_tree().connect("network_peer_disconnected",  Callable(self, "_on_peer_disconnected"))
-	statistics_label_1.hide()
+	LobbyLabel.text = "Lobby: %s" % GDSync.get_lobby_name()
 	statistics_label_2.text = "%d : %d(%s max)" % [0,0, game_win_mode_max_count[Global.game_win_mode-1]]
-
-func _on_peer_connected(id):
-	print('player[%d] connect' % id)
-
-func _on_peer_disconnected(id):
-	print('player[%d] disconnect' % id)
-	#var player_to_remove = get_node_or_null("Player" + str(id))
-	#if player_to_remove:
-		#player_to_remove.queue_free()  # 移除玩家节点
 	
 func get_random_choice():
 	var rand_index = randi() % 3
@@ -107,7 +96,7 @@ func _on_load_anim_finished():
 		result_texture.texture = defeat_icon
 		restart_button.show()
 	
-	#statistics_label_1.text = "Winning Rate: %f" % (float(player_win_count)/total_play_counts)
+	#LobbyLabel.text = "Winning Rate: %f" % (float(player_win_count)/total_play_counts)
 	statistics_label_2.text = "%d : %d (%s max)" % [player_win_count, enemy_win_count, game_win_mode_max_count[Global.game_win_mode-1]]
 	#statistics_label_2.text = "Winning Counts: %d/%d" % [player_win_count, total_play_counts]
 	
