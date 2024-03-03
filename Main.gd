@@ -40,7 +40,7 @@ var current_player_choice = -1
 
 
 func _ready():
-	LobbyLabel.text = "Lobby: %s" % GDSync.get_lobby_name()
+	LobbyLabel.text = GDSync.get_lobby_name()
 	statistics_label_2.text = "%d : %d(%s max)" % [0,0, game_win_mode_max_count[Global.game_win_mode-1]]
 	
 func get_random_choice():

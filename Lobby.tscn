@@ -58,8 +58,17 @@ offset_bottom = 60.0
 theme_override_font_sizes/font_size = 32
 text = "Back"
 
+[node name="PlayButton" type="Button" parent="ColorRect"]
+offset_left = 984.0
+offset_top = 552.0
+offset_right = 1104.0
+offset_bottom = 612.0
+theme_override_font_sizes/font_size = 32
+text = "Start"
+
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
 [connection signal="pressed" from="ColorRect/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="ColorRect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

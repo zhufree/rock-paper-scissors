@@ -29,7 +29,7 @@ SceneManager="*res://SceneManager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/godotgpt/plugin.cfg")
+enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg")
 
 [rendering]
 

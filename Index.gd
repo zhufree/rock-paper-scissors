@@ -36,7 +36,8 @@ func _on_three_button_pressed():
 	game_win_mode_label.text = three_button.text
 
 
-func creat_lobby():
+
+func _on_creat_lobby_button_pressed():
 	GDSync.create_lobby(
 		"zhufree's Lobby",
 		"123",
@@ -51,10 +52,6 @@ func creat_lobby():
 	)
 
 
-func _on_creat_lobby_button_pressed():
-	creat_lobby()
-
-
 func _on_join_lobby_button_pressed():
 	GDSync.join_lobby("zhufree's Lobby", "123")
 
@@ -62,6 +59,7 @@ func _on_join_lobby_button_pressed():
 func lobby_created(lobby_name : String):
 	print("Succesfully created lobby "+lobby_name)
 	Global.lobby_name = lobby_name
+	# 创建之后还要加入
 	GDSync.join_lobby("zhufree's Lobby", "123")
 	SceneManager.perform_scene_change("res://Lobby.tscn")
 

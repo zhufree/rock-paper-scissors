@@ -27,9 +27,12 @@ func refresh_player_list():
 
 
 func _on_timer_timeout():
-	print(GDSync.get_host())
 	refresh_player_list()
 
 func _on_back_button_pressed():
 	GDSync.leave_lobby()
 	SceneManager.perform_scene_change("res://Index.tscn")
+
+
+func _on_play_button_pressed():
+	SceneManager.perform_scene_change("res://Main.tscn")
