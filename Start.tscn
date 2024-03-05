@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://dkbl6smwpb35"]
 
-[ext_resource type="Script" path="res://Index.gd" id="1_hpap7"]
-[ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="2_2mwaw"]
+[ext_resource type="Script" path="res://Start.gd" id="1_ux8lf"]
+[ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="2_ehyv0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f1t58"]
 font_size = 100
 font_color = Color(0.8, 0.658824, 0.313726, 1)
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_hpap7")
+script = ExtResource("1_ux8lf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0
 offset_bottom = 648.0
-theme = ExtResource("2_2mwaw")
+theme = ExtResource("2_ehyv0")
 color = Color(0.698039, 1, 1, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]

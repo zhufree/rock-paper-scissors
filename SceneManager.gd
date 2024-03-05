@@ -1,8 +1,9 @@
 # SceneManager.gd
 extends Node
+class_name SceneManager
 
 var instance: SceneManager = null
-var current_scene = preload("res://Index.tscn").instantiate()
+var current_scene = preload("res://Start.tscn").instantiate()
 var scene_container = null
 signal scene_change_requested(new_scene_path)
 

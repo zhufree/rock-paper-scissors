@@ -59,6 +59,7 @@ theme_override_font_sizes/font_size = 32
 text = "Back"
 
 [node name="PlayButton" type="Button" parent="ColorRect"]
+layout_mode = 0
 offset_left = 984.0
 offset_top = 552.0
 offset_right = 1104.0
