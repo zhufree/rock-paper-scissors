@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://deahjvb7dg2x"]
+
+[ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="1_w560x"]
+[ext_resource type="Script" path="res://view/score.gd" id="2_dpd10"]
+[ext_resource type="Texture2D" uid="uid://dmvnpa2dht7l3" path="res://assets/images/paper.png" id="3_4kqyp"]
+[ext_resource type="PackedScene" uid="uid://csjdwovq2kw7g" path="res://view/card.tscn" id="3_yj46n"]
+[ext_resource type="Texture2D" uid="uid://ccseqldymijh3" path="res://assets/images/scissors.png" id="4_aunfo"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_fkv1x"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_akc3l"]
+events = [SubResource("InputEventKey_fkv1x")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_yheej"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_fpmn2"]
+events = [SubResource("InputEventKey_yheej")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_nxxgt"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_ma8cn"]
+events = [SubResource("InputEventKey_nxxgt")]
+
+[node name="Score" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_w560x")
+script = ExtResource("2_dpd10")
+
+[node name="CardContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Rock" parent="CardContainer" instance=ExtResource("3_yj46n")]
+layout_mode = 2
+shortcut = SubResource("Shortcut_akc3l")
+card_type = "Rock"
+
+[node name="Paper" parent="CardContainer" instance=ExtResource("3_yj46n")]
+layout_mode = 2
+shortcut = SubResource("Shortcut_fpmn2")
+icon = ExtResource("3_4kqyp")
+card_type = "Paper"
+
+[node name="Scissors" parent="CardContainer" instance=ExtResource("3_yj46n")]
+layout_mode = 2
+shortcut = SubResource("Shortcut_ma8cn")
+icon = ExtResource("4_aunfo")
+card_type = "Scissors"
+
+[node name="LabelContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LabelContainer"]
+layout_mode = 2
+text = "score：0"
+
+[connection signal="reselect_card" from="." to="CardContainer/Rock" method="_on_reselect_card"]
+[connection signal="reselect_card" from="." to="CardContainer/Paper" method="_on_reselect_card"]
+[connection signal="reselect_card" from="." to="CardContainer/Scissors" method="_on_reselect_card"]
+[connection signal="selected_card" from="." to="CardContainer/Rock" method="_on_selected_card"]
+[connection signal="selected_card" from="." to="CardContainer/Paper" method="_on_selected_card"]
+[connection signal="selected_card" from="." to="CardContainer/Scissors" method="_on_selected_card"]
+[connection signal="pressed" from="CardContainer/Rock" to="." method="_on_rock_button_pressed"]
+[connection signal="pressed" from="CardContainer/Paper" to="." method="_on_paper_button_pressed"]
+[connection signal="pressed" from="CardContainer/Scissors" to="." method="_on_scissors_button_pressed"]
