@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://by0cu6nh8knd"]
+[gd_scene load_steps=11 format=3 uid="uid://by0cu6nh8knd"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_ph6pp"]
 [ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="2_5ico3"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cppt2phhsht02" path="res://assets/images/rock.png" id="4_2kycb"]
 [ext_resource type="Texture2D" uid="uid://ccseqldymijh3" path="res://assets/images/scissors.png" id="4_fojvn"]
 [ext_resource type="PackedScene" uid="uid://deahjvb7dg2x" path="res://view/score.tscn" id="7_allov"]
+[ext_resource type="PackedScene" uid="uid://bq4y1gb53l01f" path="res://view/upgrade.tscn" id="8_ptlqm"]
 
 [sub_resource type="Animation" id="Animation_kule7"]
 resource_name = "load"
@@ -133,6 +134,7 @@ offset_right = 264.0
 offset_bottom = 361.0
 
 [node name="PlayerScore" parent="MainContainer" instance=ExtResource("7_allov")]
+unique_name_in_owner = true
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -146,6 +148,40 @@ grow_horizontal = 0
 grow_vertical = 0
 is_player = true
 
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer"]
+visible = false
+offset_left = 400.0
+offset_top = 200.0
+offset_right = 752.0
+offset_bottom = 448.0
+theme = ExtResource("2_5ico3")
+
+[node name="Restart" type="Button" parent="MainContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
+[node name="Continue" type="Button" parent="MainContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Continue"
+
+[node name="Upgrade" parent="MainContainer" instance=ExtResource("8_ptlqm")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -153.0
+offset_right = 226.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="animation_finished" from="MainContainer/HBoxContainer/VBoxContainer/PlayerContainer/LoadAnim" to="." method="_on_player_load_anim_animation_finished"]
 [connection signal="timeout" from="MainContainer/HBoxContainer/VBoxContainer2/ResultContainer/ResultLoadTimer" to="." method="_on_result_load_timer_timeout"]
 [connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="computer_selected" from="MainContainer/Upgrade" to="MainContainer/ComputerScore" method="_on_upgrade_computer_selected"]
+[connection signal="player_selected" from="MainContainer/Upgrade" to="MainContainer/PlayerScore" method="_on_upgrade_player_selected"]

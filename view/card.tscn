@@ -18,10 +18,10 @@ offset_bottom = 109.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 36
+disabled = true
 shortcut = SubResource("Shortcut_p43cj")
 icon = ExtResource("1_1giip")
 script = ExtResource("2_3a55g")
-card_type = null
 
 [node name="Shortcut_tips" type="Label" parent="."]
 visible = false

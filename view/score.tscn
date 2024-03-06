@@ -42,19 +42,19 @@ layout_mode = 2
 [node name="Rock" parent="CardContainer" instance=ExtResource("3_yj46n")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_akc3l")
-card_type = "Rock"
+card_type = 1
 
 [node name="Paper" parent="CardContainer" instance=ExtResource("3_yj46n")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_fpmn2")
 icon = ExtResource("3_4kqyp")
-card_type = "Paper"
+card_type = 2
 
 [node name="Scissors" parent="CardContainer" instance=ExtResource("3_yj46n")]
 layout_mode = 2
 shortcut = SubResource("Shortcut_ma8cn")
 icon = ExtResource("4_aunfo")
-card_type = "Scissors"
+card_type = 3
 
 [node name="LabelContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

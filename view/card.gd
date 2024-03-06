@@ -1,7 +1,7 @@
 extends Button
 
+@export var card_type:Global.BuffType = Global.BuffType.None
 
-@export_enum("Rock", "Paper", "Scissors") var card_type:String = "Rock"
 
 var cardlevel: int = 1
 
@@ -13,7 +13,7 @@ func _ready():
 
 func _on_player():
 	$Shortcut_tips.show()
-	
+
 func _on_computer():
 	shortcut = null
 
@@ -27,20 +27,24 @@ func _set_card_level(num:int):
 	for i in range(3-num):
 		label_text += not_heart
 
-	cardlevel = num
 	$Level.set_text(label_text)
 
+# 超过3不会增加等级，但会被记录
 func add_heart():
 	if cardlevel >=2:
 		_set_card_level(3)
 	else:
 		_set_card_level(cardlevel+1)
+	cardlevel = cardlevel + 1
 
+# 不会出现低于0的情况
 func reduce_heart():
 	if cardlevel <= 1:
+		cardlevel = 0
 		_set_card_level(0)
 	else:
-		_set_card_level(cardlevel-1)
+		cardlevel = cardlevel - 1
+		_set_card_level(cardlevel)
 
 func _on_selected_card(type):
 	if (type==card_type):
