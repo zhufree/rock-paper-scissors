@@ -48,7 +48,6 @@ func reduce_heart():
 
 func _on_selected_card(type):
 	if (type==card_type):
-		print(card_type)
 		$Select.show()
 	else:
 		set_disabled(true)

@@ -26,17 +26,22 @@ var total_play_counts = 0
 var player_win_count = 0
 var enemy_win_count = 0
 var draw_count = 0
-var current_player_choice = -1
+var current_player_choice:Global.BuffType = Global.BuffType.None
+var current_computer_choice:Global.BuffType = Global.BuffType.None
+
 
 @onready var player_choice_texture = %PlayerChoiceTexture
-@onready var enemy_choice_texture = %EnemyChoiceTexture
 @onready var player_load_anim = %LoadAnim
 @onready var result_load_timer = %ResultLoadTimer
 
 @onready var result_texture = %ResultTexture
-@onready var LobbyLabel = %LobbyLabel
 @onready var statistics_label_2 = %StatisticsLabel2
 @onready var restart_button = %RestartButton
+
+
+signal player_win
+signal computer_win
+
 
 func _ready():
 	statistics_label_2.text = "%d : %d(%s max)" % [0,0, game_win_mode_max_count[Global.game_win_mode-1]]
@@ -64,37 +69,44 @@ func _on_player_load_anim_animation_finished(anim_name):
 
 func _on_load_anim_finished():
 	var index = current_player_choice
-	player_choice_texture.texture = load(choices[index]['res'])
-	var result  = get_random_choice()
-	var program_index = result[0]
-	var result_item = result[1]
-	enemy_choice_texture.texture = load(result_item['res'])
-	total_play_counts += 1
+	#player_choice_texture.texture = load(choices[index]['res'])
+	#var result  = get_random_choice()
+	var program_index = current_computer_choice
+	#var result_item = result[1]
+	#total_play_counts += 1
 	
-	if index != 2 and index > program_index:
-		result_texture.texture = win_icon
-		player_win_count += 1
-	elif index == 2 and program_index == 1:
-		result_texture.texture = win_icon
-		player_win_count += 1
-	elif index == 0 and program_index == 2:
-		result_texture.texture = win_icon
-		player_win_count += 1
-	elif index == program_index:
-		result_texture.texture = draw_icon
-		draw_count += 1
+	#if index != 2 and index > program_index:
+		#result_texture.texture = win_icon
+		#player_win_count += 1
+	#elif index == 2 and program_index == 1:
+		#result_texture.texture = win_icon
+		#player_win_count += 1
+	#elif index == 0 and program_index == 2:
+		#result_texture.texture = win_icon
+		#player_win_count += 1
+	#elif index == program_index:
+		#result_texture.texture = draw_icon
+		#draw_count += 1
+	#else:
+		#result_texture.texture = lose_icon
+		#enemy_win_count += 1
+	#if player_win_count == Global.game_win_mode:
+		#result_texture.texture = vistory_icon
+		#restart_button.show()
+	#elif enemy_win_count == Global.game_win_mode:
+		#result_texture.texture = defeat_icon
+		#restart_button.show()
+
+	# r1p2s3 index - program  win: 1 or -2 lose: -1 or 2
+	if index - program_index == 1 or index - program_index == -2:
+		player_win.emit()
+		print("player win")
 	else:
-		result_texture.texture = lose_icon
-		enemy_win_count += 1
-	if player_win_count == Global.game_win_mode:
-		result_texture.texture = vistory_icon
-		restart_button.show()
-	elif enemy_win_count == Global.game_win_mode:
-		result_texture.texture = defeat_icon
-		restart_button.show()
-	
+		computer_win.emit()
+		print("computer win")
+
 	#LobbyLabel.text = "Winning Rate: %f" % (float(player_win_count)/total_play_counts)
-	statistics_label_2.text = "%d : %d (%s max)" % [player_win_count, enemy_win_count, game_win_mode_max_count[Global.game_win_mode-1]]
+	#statistics_label_2.text = "%d : %d (%s max)" % [player_win_count, enemy_win_count, game_win_mode_max_count[Global.game_win_mode-1]]
 	#statistics_label_2.text = "Winning Counts: %d/%d" % [player_win_count, total_play_counts]
 
 var countdown = 3
@@ -118,3 +130,16 @@ func _on_restart_button_pressed():
 	statistics_label_2.text = "%d : %d(%s max)" % [0,0, game_win_mode_max_count[Global.game_win_mode-1]]
 	restart_button.hide()
 	result_texture.texture = null
+
+func _on_player_score_selected_card(type):
+	current_player_choice = type
+	if current_computer_choice != Global.BuffType.None:
+		_calculate()
+
+func _on_computer_score_selected_card(type):
+	current_computer_choice = type
+	if current_player_choice != Global.BuffType.None:
+		_calculate()
+
+func _calculate():
+	_on_load_anim_finished()
