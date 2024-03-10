@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://csjdwovq2kw7g"]
+
+[ext_resource type="Texture2D" uid="uid://cppt2phhsht02" path="res://assets/images/rock.png" id="1_1giip"]
+[ext_resource type="Script" path="res://view/card.gd" id="2_3a55g"]
+[ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="3_00w65"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_owaxt"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_p43cj"]
+events = [SubResource("InputEventKey_owaxt")]
+
+[node name="RockButton" type="Button"]
+offset_right = 109.0
+offset_bottom = 109.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 36
+disabled = true
+shortcut = SubResource("Shortcut_p43cj")
+icon = ExtResource("1_1giip")
+script = ExtResource("2_3a55g")
+
+[node name="Shortcut_tips" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 10.0
+offset_top = -10.0
+offset_right = 50.0
+offset_bottom = 43.0
+text = "0"
+
+[node name="Level" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.0
+offset_top = -22.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_00w65")
+bbcode_enabled = true
+text = "[color=#ee0000]♥[/color][color=#cccccc]♥[/color][color=#cccccc]♥[/color]"
+
+[node name="Select" type="ReferenceRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -1.25
+offset_top = -1.25
+offset_right = 112.75
+offset_bottom = 112.75
+border_color = Color(0.960784, 0.670588, 0.431373, 1)
+border_width = 5.0
+editor_only = false

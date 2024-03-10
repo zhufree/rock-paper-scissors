@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq4y1gb53l01f"]
+
+[ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="1_dy706"]
+[ext_resource type="Script" path="res://view/upgrade.gd" id="2_cce8c"]
+[ext_resource type="Texture2D" uid="uid://dmvnpa2dht7l3" path="res://assets/images/paper.png" id="2_v5xpq"]
+[ext_resource type="Texture2D" uid="uid://cppt2phhsht02" path="res://assets/images/rock.png" id="3_a2b3k"]
+[ext_resource type="ButtonGroup" uid="uid://bkmxe0q4rbenm" path="res://view/upgrade_button_group.tres" id="3_qv001"]
+[ext_resource type="Texture2D" uid="uid://ccseqldymijh3" path="res://assets/images/scissors.png" id="5_4fecx"]
+
+[node name="Upgrade" type="VBoxContainer"]
+offset_right = 452.0
+offset_bottom = 285.0
+theme = ExtResource("1_dy706")
+script = ExtResource("2_cce8c")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Select
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardList" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Rock" type="Button" parent="CardList"]
+layout_mode = 2
+theme = ExtResource("1_dy706")
+theme_type_variation = &"Card"
+toggle_mode = true
+button_group = ExtResource("3_qv001")
+text = "获胜积分 +10"
+icon = ExtResource("3_a2b3k")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Spacer" type="Control" parent="CardList"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Paper" type="Button" parent="CardList"]
+layout_mode = 2
+theme = ExtResource("1_dy706")
+theme_type_variation = &"Card"
+toggle_mode = true
+button_group = ExtResource("3_qv001")
+text = "获胜积分 +10"
+icon = ExtResource("2_v5xpq")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Spacer2" type="Control" parent="CardList"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Scissors" type="Button" parent="CardList"]
+layout_mode = 2
+theme = ExtResource("1_dy706")
+theme_type_variation = &"Card"
+toggle_mode = true
+button_group = ExtResource("3_qv001")
+text = "获胜积分 +10"
+icon = ExtResource("5_4fecx")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="UpgradeSubmit" type="Button" parent="Container"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -32.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+text = "Submit"
+
+[connection signal="pressed" from="CardList/Rock" to="." method="_on_rock_pressed"]
+[connection signal="pressed" from="CardList/Paper" to="." method="_on_paper_pressed"]
+[connection signal="pressed" from="CardList/Scissors" to="." method="_on_scissors_pressed"]
+[connection signal="pressed" from="Container/UpgradeSubmit" to="." method="_on_upgrade_submit_pressed"]

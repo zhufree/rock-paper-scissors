@@ -1,5 +1,8 @@
 extends Node
 
+
+enum BuffType {None, Rock, Paper, Scissors}
+
 var game_win_mode = 1
 var player_client_id = -1
 var enemy_client_id = -1

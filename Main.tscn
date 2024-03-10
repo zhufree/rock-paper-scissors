@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://by0cu6nh8knd"]
+[gd_scene load_steps=14 format=3 uid="uid://by0cu6nh8knd"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_ph6pp"]
 [ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="2_5ico3"]
-[ext_resource type="Texture2D" uid="uid://d2x1j1mxma1ar" path="res://images/paper.png" id="3_n8b5q"]
-[ext_resource type="Texture2D" uid="uid://d4albxvgpqe0v" path="res://images/rock.png" id="4_2kycb"]
-[ext_resource type="Texture2D" uid="uid://dsvts2e5wku7e" path="res://images/scissors.png" id="4_fojvn"]
+[ext_resource type="PackedScene" uid="uid://djy1m1omvvc2g" path="res://view/mainContainer.tscn" id="2_ry3i0"]
+[ext_resource type="Texture2D" uid="uid://dmvnpa2dht7l3" path="res://assets/images/paper.png" id="3_n8b5q"]
+[ext_resource type="Texture2D" uid="uid://cppt2phhsht02" path="res://assets/images/rock.png" id="4_2kycb"]
+[ext_resource type="Texture2D" uid="uid://ccseqldymijh3" path="res://assets/images/scissors.png" id="4_fojvn"]
+[ext_resource type="PackedScene" uid="uid://deahjvb7dg2x" path="res://view/score.tscn" id="7_allov"]
+[ext_resource type="Script" path="res://view/Buttons.gd" id="7_j8l72"]
+[ext_resource type="PackedScene" uid="uid://bq4y1gb53l01f" path="res://view/upgrade.tscn" id="8_ptlqm"]
+[ext_resource type="Script" path="res://Character/ComputerAI.gd" id="9_leuub"]
+[ext_resource type="Script" path="res://Character/Player.gd" id="10_557op"]
 
 [sub_resource type="Animation" id="Animation_kule7"]
 resource_name = "load"
@@ -12,7 +18,7 @@ length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%PlayerChoiceTexture:texture")
+tracks/0/path = NodePath("PlayerChoiceTexture:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,47 +27,32 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("4_2kycb"), ExtResource("3_n8b5q"), ExtResource("4_fojvn")]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%EnemyChoiceTexture:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_fojvn"), ExtResource("4_2kycb"), ExtResource("3_n8b5q")]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1utep"]
 _data = {
 "load": SubResource("Animation_kule7")
 }
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_ph6pp")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1152.0
-offset_bottom = 640.0
+[node name="MainContainer" parent="." instance=ExtResource("2_ry3i0")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer"]
+visible = false
+offset_right = 885.0
+offset_bottom = 422.0
 theme = ExtResource("2_5ico3")
-color = Color(0.698039, 1, 1, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 640.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Spacer" type="Control" parent="ColorRect/HBoxContainer/VBoxContainer"]
+[node name="Spacer" type="Control" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PlayerContainer" type="MarginContainer" parent="ColorRect/HBoxContainer/VBoxContainer"]
+[node name="PlayerContainer" type="MarginContainer" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -70,46 +61,37 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 30
 
-[node name="PlayerChoiceTexture" type="TextureRect" parent="ColorRect/HBoxContainer/VBoxContainer/PlayerContainer"]
+[node name="PlayerChoiceTexture" type="TextureRect" parent="MainContainer/HBoxContainer/VBoxContainer/PlayerContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("4_2kycb")
 expand_mode = 2
 
-[node name="LoadAnim" type="AnimationPlayer" parent="ColorRect/HBoxContainer/VBoxContainer/PlayerContainer"]
+[node name="LoadAnim" type="AnimationPlayer" parent="MainContainer/HBoxContainer/VBoxContainer/PlayerContainer"]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_1utep")
 }
 
-[node name="PlayerInfoContainer" type="MarginContainer" parent="ColorRect/HBoxContainer/VBoxContainer"]
+[node name="PlayerInfoContainer" type="MarginContainer" parent="MainContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_right = 30
 
-[node name="PlayerInfoLabel" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/PlayerInfoContainer"]
+[node name="PlayerInfoLabel" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer/PlayerInfoContainer"]
 layout_mode = 2
 text = "Player"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatisticsContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer2"]
+[node name="StatisticsContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LobbyLabel" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer2/StatisticsContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_5ico3")
-text = "Lobby"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="StatisticsLabel2" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer2/StatisticsContainer"]
+[node name="StatisticsLabel2" type="Label" parent="MainContainer/HBoxContainer/VBoxContainer2/StatisticsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -117,88 +99,125 @@ text = "Winning Counts:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResultContainer" type="CenterContainer" parent="ColorRect/HBoxContainer/VBoxContainer2"]
+[node name="ResultContainer" type="CenterContainer" parent="MainContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="ResultLoadTimer" type="Timer" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer"]
+[node name="ResultLoadTimer" type="Timer" parent="MainContainer/HBoxContainer/VBoxContainer2/ResultContainer"]
 unique_name_in_owner = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/HBoxContainer/VBoxContainer2/ResultContainer"]
 layout_mode = 2
 
-[node name="ResultTexture" type="TextureRect" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer"]
+[node name="ResultTexture" type="TextureRect" parent="MainContainer/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
 expand_mode = 5
 stretch_mode = 5
 
-[node name="RestartButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="MainContainer/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
 text = "Restart!"
 
-[node name="PlayerChoose" type="HBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer2"]
+[node name="PlayerChoose" type="HBoxContainer" parent="MainContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 alignment = 1
 
-[node name="RockButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 36
-icon = ExtResource("4_2kycb")
+[node name="Buttons" type="VBoxContainer" parent="MainContainer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.5
+offset_top = -59.0
+offset_right = 133.5
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_5ico3")
+script = ExtResource("7_j8l72")
 
-[node name="PaperButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 36
-icon = ExtResource("3_n8b5q")
-
-[node name="ScissorsButton" type="Button" parent="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 36
-icon = ExtResource("4_fojvn")
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="ColorRect/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Spacer" type="Control" parent="ColorRect/HBoxContainer/VBoxContainer3"]
+[node name="Restart" type="Button" parent="MainContainer/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Restart"
 
-[node name="EnemyContainer" type="MarginContainer" parent="ColorRect/HBoxContainer/VBoxContainer3"]
+[node name="Continue" type="Button" parent="MainContainer/Buttons"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 30
+theme_override_font_sizes/font_size = 32
+text = "Continue"
 
-[node name="EnemyChoiceTexture" type="TextureRect" parent="ColorRect/HBoxContainer/VBoxContainer3/EnemyContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("4_fojvn")
-expand_mode = 2
+[node name="Upgrade" parent="MainContainer" instance=ExtResource("8_ptlqm")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -153.0
+offset_right = 226.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Spacer2" type="Control" parent="ColorRect/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 3
+[node name="Computer" type="Node" parent="MainContainer"]
+script = ExtResource("9_leuub")
 
-[connection signal="animation_finished" from="ColorRect/HBoxContainer/VBoxContainer/PlayerContainer/LoadAnim" to="." method="_on_player_load_anim_animation_finished"]
-[connection signal="timeout" from="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer/ResultLoadTimer" to="." method="_on_result_load_timer_timeout"]
-[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose/RockButton" to="." method="press_choice" binds= [0]]
-[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose/PaperButton" to="." method="press_choice" binds= [1]]
-[connection signal="pressed" from="ColorRect/HBoxContainer/VBoxContainer2/PlayerChoose/ScissorsButton" to="." method="press_choice" binds= [2]]
+[node name="ComputerScore" parent="MainContainer/Computer" instance=ExtResource("7_allov")]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 264.0
+offset_bottom = 361.0
+
+[node name="Player" type="Node" parent="MainContainer"]
+script = ExtResource("10_557op")
+
+[node name="PlayerScore" parent="MainContainer/Player" instance=ExtResource("7_allov")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -361.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+is_player = true
+
+[connection signal="computer_win" from="." to="MainContainer/Buttons" method="_on_main_complete"]
+[connection signal="computer_win" from="." to="MainContainer/Computer/ComputerScore" method="_on_main_computer_win"]
+[connection signal="computer_win" from="." to="MainContainer/Player/PlayerScore" method="_on_main_player_lose"]
+[connection signal="player_win" from="." to="MainContainer/Buttons" method="_on_main_complete"]
+[connection signal="player_win" from="." to="MainContainer/Computer/ComputerScore" method="_on_main_computer_lose"]
+[connection signal="player_win" from="." to="MainContainer/Player/PlayerScore" method="_on_main_player_win"]
+[connection signal="animation_finished" from="MainContainer/HBoxContainer/VBoxContainer/PlayerContainer/LoadAnim" to="." method="_on_player_load_anim_animation_finished"]
+[connection signal="timeout" from="MainContainer/HBoxContainer/VBoxContainer2/ResultContainer/ResultLoadTimer" to="." method="_on_result_load_timer_timeout"]
+[connection signal="pressed" from="MainContainer/HBoxContainer/VBoxContainer2/ResultContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="MainContainer/Buttons/Restart" to="MainContainer/Buttons" method="_on_button_pressed"]
+[connection signal="pressed" from="MainContainer/Buttons/Restart" to="MainContainer/Upgrade" method="_on_continue_pressed"]
+[connection signal="pressed" from="MainContainer/Buttons/Restart" to="MainContainer/Computer/ComputerScore" method="_on_restart_pressed"]
+[connection signal="pressed" from="MainContainer/Buttons/Restart" to="MainContainer/Player/PlayerScore" method="_on_restart_pressed"]
+[connection signal="pressed" from="MainContainer/Buttons/Continue" to="MainContainer/Buttons" method="_on_button_pressed"]
+[connection signal="pressed" from="MainContainer/Buttons/Continue" to="MainContainer/Upgrade" method="_on_continue_pressed"]
+[connection signal="pressed" from="MainContainer/Buttons/Continue" to="MainContainer/Computer/ComputerScore" method="_on_continue_pressed"]
+[connection signal="pressed" from="MainContainer/Buttons/Continue" to="MainContainer/Player/PlayerScore" method="_on_continue_pressed"]
+[connection signal="player_selected" from="MainContainer/Upgrade" to="MainContainer/Computer" method="_on_upgrade_player_selected"]
+[connection signal="player_selected" from="MainContainer/Upgrade" to="MainContainer/Player/PlayerScore" method="_on_upgrade_player_selected"]
+[connection signal="upgrade_end" from="MainContainer/Upgrade" to="MainContainer/Computer" method="_on_upgrade_upgrade_end"]
+[connection signal="upgrade_end" from="MainContainer/Upgrade" to="MainContainer/Player/PlayerScore" method="_on_upgrade_upgrade_end"]
+[connection signal="selected_card" from="MainContainer/Computer/ComputerScore" to="." method="_on_computer_score_selected_card"]
+[connection signal="selected_card" from="MainContainer/Player/PlayerScore" to="." method="_on_player_score_selected_card"]
+[connection signal="selected_card" from="MainContainer/Player/PlayerScore" to="MainContainer/Computer" method="_on_player_score_selected_card"]

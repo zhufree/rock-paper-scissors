@@ -17,19 +17,18 @@ uniqueUsername=true
 [application]
 
 config/name="rock–paper–scissors"
-run/main_scene="res://Root.tscn"
+run/main_scene="res://Start.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://Global.gd"
-GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
-SceneManager="*res://SceneManager.gd"
 
-[editor_plugins]
+[display]
 
-enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg")
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [rendering]
 
