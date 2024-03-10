@@ -32,4 +32,14 @@ func _on_upgrade_submit_pressed():
 
 func _hide_upgrade():
 	hide()
+	%UpgradeSubmit.hide()
+	%UpgradeSubmit.set_disabled(false)
+	player_select_type = Global.BuffType.None
 	upgrade_end.emit()
+
+func _on_continue_pressed():
+	show()
+	can_upgrade = true
+	#$CardList/Rock.button_group.set_allow_unpress(true)
+	if $CardList/Rock.button_group.get_pressed_button():
+		$CardList/Rock.button_group.get_pressed_button().set_pressed(false)

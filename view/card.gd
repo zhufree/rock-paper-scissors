@@ -3,13 +3,13 @@ extends Button
 @export var card_type:Global.BuffType = Global.BuffType.None
 
 
-var cardlevel: int = 1
+var card_level: int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if shortcut:
 		$Shortcut_tips.set_text(shortcut.get_as_text())
-	_set_card_level(cardlevel)
+	_set_card_level(card_level)
 
 func _on_player():
 	$Shortcut_tips.show()
@@ -31,20 +31,20 @@ func _set_card_level(num:int):
 
 # 超过3不会增加等级，但会被记录
 func add_heart():
-	if cardlevel >=2:
+	if card_level >=2:
 		_set_card_level(3)
 	else:
-		_set_card_level(cardlevel+1)
-	cardlevel = cardlevel + 1
+		_set_card_level(card_level+1)
+	card_level = card_level + 1
 
 # 不会出现低于0的情况
 func reduce_heart():
-	if cardlevel <= 1:
-		cardlevel = 0
+	if card_level <= 1:
+		card_level = 0
 		_set_card_level(0)
 	else:
-		cardlevel = cardlevel - 1
-		_set_card_level(cardlevel)
+		card_level = card_level - 1
+		_set_card_level(card_level)
 
 func _on_selected_card(type):
 	if (type==card_type):
@@ -55,4 +55,12 @@ func _on_selected_card(type):
 func _on_reselect_card():
 	$Select.hide()
 	set_disabled(false)
-	print('reselect')
+
+func _on_continue():
+	$Select.hide()
+	set_disabled(true)
+
+func _on_restart():
+	_on_continue()
+	card_level = 1
+	_set_card_level(card_level)

@@ -1,31 +1,31 @@
 extends Node2D
 
 
-const game_win_mode_max_count = [1, 3, 5]
-const choices = [{
-	'id': 'rock',
-	'res' : "res://assets/images/rock.png"
-}, {
-	'id': 'paper',
-	'res': "res://assets/images/paper.png"
-}, {
-	'id': 'scissors',
-	'res': "res://assets/images/scissors.png"
-}]
-const countdown_frames = [
-	preload("res://assets/images/1.png"),
-	preload("res://assets/images/2.png"),
-	preload("res://assets/images/3.png")
-]
-const win_icon = preload("res://assets/images/win.png")
-const lose_icon = preload("res://assets/images/lose.png")
-const draw_icon = preload("res://assets/images/draw.png")
-const vistory_icon = preload("res://assets/images/victory.png")
-const defeat_icon = preload("res://assets/images/defeat.png")
-var total_play_counts = 0
-var player_win_count = 0
-var enemy_win_count = 0
-var draw_count = 0
+#const game_win_mode_max_count = [1, 3, 5]
+#const choices = [{
+	#'id': 'rock',
+	#'res' : "res://assets/images/rock.png"
+#}, {
+	#'id': 'paper',
+	#'res': "res://assets/images/paper.png"
+#}, {
+	#'id': 'scissors',
+	#'res': "res://assets/images/scissors.png"
+#}]
+#const countdown_frames = [
+	#preload("res://assets/images/1.png"),
+	#preload("res://assets/images/2.png"),
+	#preload("res://assets/images/3.png")
+#]
+#const win_icon = preload("res://assets/images/win.png")
+#const lose_icon = preload("res://assets/images/lose.png")
+#const draw_icon = preload("res://assets/images/draw.png")
+#const vistory_icon = preload("res://assets/images/victory.png")
+#const defeat_icon = preload("res://assets/images/defeat.png")
+#var total_play_counts = 0
+#var player_win_count = 0
+#var enemy_win_count = 0
+#var draw_count = 0
 var current_player_choice:Global.BuffType = Global.BuffType.None
 var current_computer_choice:Global.BuffType = Global.BuffType.None
 
@@ -44,28 +44,29 @@ signal computer_win
 
 
 func _ready():
-	statistics_label_2.text = "%d : %d(%s max)" % [0,0, game_win_mode_max_count[Global.game_win_mode-1]]
+	#statistics_label_2.text = "%d : %d(%s max)" % [0,0, game_win_mode_max_count[Global.game_win_mode-1]]
+	pass
 	
-func get_random_choice():
-	var rand_index = randi() % 3
-	return [rand_index, choices[rand_index]]
+#func get_random_choice():
+	#var rand_index = randi() % 3
+	#return [rand_index, choices[rand_index]]
 
-func press_choice(index):
-	current_player_choice = index
-	player_load_anim.play("load")
-	result_texture.texture = countdown_frames[countdown-1]
-	result_load_timer.start()
+#func press_choice(index):
+	#current_player_choice = index
+	#player_load_anim.play("load")
+	#result_texture.texture = countdown_frames[countdown-1]
+	#result_load_timer.start()
+#
+#var loop_count = 0  # 当前循环次数
+#var max_loops = 5  # 你想要循环的次数
 
-var loop_count = 0  # 当前循环次数
-var max_loops = 5  # 你想要循环的次数
-
-func _on_player_load_anim_animation_finished(anim_name):
-	loop_count += 1
-	if loop_count < max_loops:
-		player_load_anim.play(anim_name)  # 重新播放动画
-	else:
-		loop_count = 0  # 重置循环次数
-		_on_load_anim_finished()  # 调用循环结束的回调函数
+#func _on_player_load_anim_animation_finished(anim_name):
+	#loop_count += 1
+	#if loop_count < max_loops:
+		#player_load_anim.play(anim_name)  # 重新播放动画
+	#else:
+		#loop_count = 0  # 重置循环次数
+		#_on_load_anim_finished()  # 调用循环结束的回调函数
 
 func _on_load_anim_finished():
 	var index = current_player_choice
@@ -108,28 +109,28 @@ func _on_load_anim_finished():
 	#LobbyLabel.text = "Winning Rate: %f" % (float(player_win_count)/total_play_counts)
 	#statistics_label_2.text = "%d : %d (%s max)" % [player_win_count, enemy_win_count, game_win_mode_max_count[Global.game_win_mode-1]]
 	#statistics_label_2.text = "Winning Counts: %d/%d" % [player_win_count, total_play_counts]
-
-var countdown = 3
-
-func _on_result_load_timer_timeout():
-	countdown -= 1
-	if countdown == 1:
-		result_load_timer.one_shot = true
-		result_texture.texture = countdown_frames[countdown-1]
-	elif countdown == 0:
-		result_load_timer.stop()
-		result_load_timer.one_shot = false
-		countdown = 3
-	else:
-		result_texture.texture = countdown_frames[countdown-1]
-
-func _on_restart_button_pressed():
-	player_win_count = 0
-	enemy_win_count = 0
-	draw_count = 0
-	statistics_label_2.text = "%d : %d(%s max)" % [0,0, game_win_mode_max_count[Global.game_win_mode-1]]
-	restart_button.hide()
-	result_texture.texture = null
+#
+#var countdown = 3
+#
+#func _on_result_load_timer_timeout():
+	#countdown -= 1
+	#if countdown == 1:
+		#result_load_timer.one_shot = true
+		#result_texture.texture = countdown_frames[countdown-1]
+	#elif countdown == 0:
+		#result_load_timer.stop()
+		#result_load_timer.one_shot = false
+		#countdown = 3
+	#else:
+		#result_texture.texture = countdown_frames[countdown-1]
+#
+#func _on_restart_button_pressed():
+	#player_win_count = 0
+	#enemy_win_count = 0
+	#draw_count = 0
+	#statistics_label_2.text = "%d : %d(%s max)" % [0,0, game_win_mode_max_count[Global.game_win_mode-1]]
+	#restart_button.hide()
+	#result_texture.texture = null
 
 func _on_player_score_selected_card(type):
 	current_player_choice = type
@@ -143,3 +144,5 @@ func _on_computer_score_selected_card(type):
 
 func _calculate():
 	_on_load_anim_finished()
+	current_computer_choice = Global.BuffType.None
+	current_player_choice = Global.BuffType.None

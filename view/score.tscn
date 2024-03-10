@@ -63,9 +63,6 @@ layout_mode = 2
 layout_mode = 2
 text = "score：0"
 
-[connection signal="reselect_card" from="." to="CardContainer/Rock" method="_on_reselect_card"]
-[connection signal="reselect_card" from="." to="CardContainer/Paper" method="_on_reselect_card"]
-[connection signal="reselect_card" from="." to="CardContainer/Scissors" method="_on_reselect_card"]
 [connection signal="selected_card" from="." to="CardContainer/Rock" method="_on_selected_card"]
 [connection signal="selected_card" from="." to="CardContainer/Paper" method="_on_selected_card"]
 [connection signal="selected_card" from="." to="CardContainer/Scissors" method="_on_selected_card"]

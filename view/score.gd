@@ -10,7 +10,6 @@ var current_score:int = 0
 
 
 signal selected_card(type:Global.BuffType)
-signal reselect_card
 
 
 # Called when the node enters the scene tree for the first time.
@@ -46,26 +45,16 @@ func _select_card(type:Global.BuffType):
 	selected_card_type = type
 	selected_card.emit(type)
 
-func _reset_select():
-	can_select = true
-	selected_card_type = Global.BuffType.None
-	reselect_card.emit()
-
-#func _on_upgrade_computer_selected(buffType):
-	#if not is_player:
-		#_upgrade_card(buffType)
-		#print("computer upgrade: ", buffType)
-
 func _on_upgrade_player_selected(buffType):
 	if is_player:
 		_upgrade_card(buffType)
-		print("player upgrade: ", buffType)
+		#print("player upgrade: ", buffType)
 		
 func _upgrade_card(buffType:Global.BuffType):
 	for node in $CardContainer.get_children():
 		if node.card_type == buffType:
 			node.add_heart()
-			print("upgrade signal: ", node, " heart: ", node.cardlevel)
+			#print("upgrade signal: ", node, " heart: ", node.card_level)
 
 func _on_upgrade_upgrade_end():
 	propagate_call("_on_reselect_card")
@@ -75,14 +64,39 @@ func _on_upgrade_upgrade_end():
 func _on_main_computer_win():
 	_add_score()
 
+func _on_main_computer_lose():
+	for node in $CardContainer.get_children():
+		if node.card_type == selected_card_type:
+			node.reduce_heart()
 
 func _on_main_player_win():
 	_add_score()
 
-func _add_score():
-	var score = 1
+func _on_main_player_lose():
 	for node in $CardContainer.get_children():
 		if node.card_type == selected_card_type:
-			score = node.cardlevel  * 10
+			node.reduce_heart()
+
+func _add_score():
+	var score:int = 1
+	for node in $CardContainer.get_children():
+		if node.card_type == selected_card_type and node:
+			score = node.card_level * 10
+			node.reduce_heart()
 	current_score = current_score + score
 	$LabelContainer/Label.set_text("score: %d" % [current_score])
+
+func _on_restart_pressed():
+	propagate_call("_on_restart")
+	
+func _on_continue_pressed():
+	propagate_call("_on_continue")
+
+func _on_restart():
+	_on_continue()
+	current_score = 0
+	$LabelContainer/Label.set_text("score: 0")
+
+func _on_continue():
+	can_select = false
+	selected_card_type = Global.BuffType.None
