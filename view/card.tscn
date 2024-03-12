@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://csjdwovq2kw7g"]
 
-[ext_resource type="Texture2D" uid="uid://cppt2phhsht02" path="res://assets/images/rock.png" id="1_1giip"]
+[ext_resource type="Texture2D" uid="uid://cp1iiavf7wkdx" path="res://assets/images/rock.png" id="1_1giip"]
 [ext_resource type="Script" path="res://view/card.gd" id="2_3a55g"]
 [ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="3_00w65"]
 
@@ -39,15 +39,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -79.0
-offset_top = -22.0
-offset_right = -1.0
-offset_bottom = -1.0
+offset_left = -69.0
+offset_top = -21.0
+offset_right = 4.0
+offset_bottom = 3.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("3_00w65")
 bbcode_enabled = true
-text = "[color=#ee0000]♥[/color][color=#cccccc]♥[/color][color=#cccccc]♥[/color]"
+text = "[img=16x16]res://assets/images/red_heart.png[/img] [img=16x16]res://assets/images/grey_heart.png[/img] [img=16x16]res://assets/images/grey_heart.png[/img]"
 
 [node name="Select" type="ReferenceRect" parent="."]
 visible = false

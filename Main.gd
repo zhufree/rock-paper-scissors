@@ -37,6 +37,7 @@ var current_computer_choice:Global.BuffType = Global.BuffType.None
 @onready var result_texture = %ResultTexture
 @onready var statistics_label_2 = %StatisticsLabel2
 @onready var restart_button = %RestartButton
+@onready var notice_label = $MainContainer/NoticeLabel
 
 
 signal player_win
@@ -133,6 +134,7 @@ func _on_load_anim_finished():
 	#result_texture.texture = null
 
 func _on_player_score_selected_card(type):
+	notice_label.hide()
 	current_player_choice = type
 	if current_computer_choice != Global.BuffType.None:
 		_calculate()
@@ -146,3 +148,7 @@ func _calculate():
 	_on_load_anim_finished()
 	current_computer_choice = Global.BuffType.None
 	current_player_choice = Global.BuffType.None
+
+func _on_player_score_card_insufficient():
+	notice_label.show()
+	notice_label.text = "You don't have this card."

@@ -10,7 +10,7 @@ var current_score:int = 0
 
 
 signal selected_card(type:Global.BuffType)
-
+signal card_insufficient
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,15 +30,24 @@ func _ready():
 # 只有Player能按button，Player只能按自己的Button
 func _on_rock_button_pressed():
 	if is_player and can_select:
-		_select_card(Global.BuffType.Rock)
+		if $CardContainer/Rock.card_level > 0:
+			_select_card(Global.BuffType.Rock)
+		else:
+			card_insufficient.emit()
 
 func _on_paper_button_pressed():
 	if is_player and can_select:
-		_select_card(Global.BuffType.Paper)
+		if $CardContainer/Paper.card_level > 0:
+			_select_card(Global.BuffType.Paper)
+		else:
+			card_insufficient.emit()
 
 func _on_scissors_button_pressed():
 	if is_player and can_select:
-		_select_card(Global.BuffType.Scissors)
+		if $CardContainer/Scissors.card_level > 0:
+			_select_card(Global.BuffType.Scissors)
+		else:
+			card_insufficient.emit()
 
 func _select_card(type:Global.BuffType):
 	can_select = false

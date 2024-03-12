@@ -2,6 +2,7 @@ extends Button
 
 @export var card_type:Global.BuffType = Global.BuffType.None
 
+signal card_insufficient
 
 var card_level: int = 1
 
@@ -17,16 +18,15 @@ func _on_player():
 func _on_computer():
 	shortcut = null
 
+# refresh heart status
 func _set_card_level(num:int):
 	var label_text = ""
-	var is_heart = "[color=#ee0000]♥[/color]"
-	var not_heart = "[color=#cccccc]♥[/color]"
-
+	var is_heart = "[img=16x16]res://assets/images/red_heart.png[/img]"
+	var not_heart = "[img=16x16]res://assets/images/grey_heart.png[/img]"
 	for i in range(num):
 		label_text += is_heart
 	for i in range(3-num):
 		label_text += not_heart
-
 	$Level.set_text(label_text)
 
 # 超过3不会增加等级，但会被记录
@@ -47,9 +47,10 @@ func reduce_heart():
 		_set_card_level(card_level)
 
 func _on_selected_card(type):
-	if (type==card_type):
+	if type==card_type:
 		$Select.show()
 	else:
+		# select one, disable other two
 		set_disabled(true)
 
 func _on_reselect_card():

@@ -24,11 +24,16 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Global.gd"
+Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 
 [display]
 
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg")
 
 [rendering]
 

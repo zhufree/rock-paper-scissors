@@ -2,10 +2,10 @@
 
 [ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="1_dy706"]
 [ext_resource type="Script" path="res://view/upgrade.gd" id="2_cce8c"]
-[ext_resource type="Texture2D" uid="uid://dmvnpa2dht7l3" path="res://assets/images/paper.png" id="2_v5xpq"]
-[ext_resource type="Texture2D" uid="uid://cppt2phhsht02" path="res://assets/images/rock.png" id="3_a2b3k"]
+[ext_resource type="Texture2D" uid="uid://bwyeh5vt3ggcw" path="res://assets/images/paper.png" id="2_v5xpq"]
+[ext_resource type="Texture2D" uid="uid://cp1iiavf7wkdx" path="res://assets/images/rock.png" id="3_a2b3k"]
 [ext_resource type="ButtonGroup" uid="uid://bkmxe0q4rbenm" path="res://view/upgrade_button_group.tres" id="3_qv001"]
-[ext_resource type="Texture2D" uid="uid://ccseqldymijh3" path="res://assets/images/scissors.png" id="5_4fecx"]
+[ext_resource type="Texture2D" uid="uid://b73bnnyla7m24" path="res://assets/images/scissors.png" id="5_4fecx"]
 
 [node name="Upgrade" type="VBoxContainer"]
 offset_right = 452.0
@@ -16,7 +16,7 @@ script = ExtResource("2_cce8c")
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 size_flags_vertical = 8
-text = "Select
+text = "Select Your Card
 "
 horizontal_alignment = 1
 vertical_alignment = 1

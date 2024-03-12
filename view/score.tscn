@@ -2,9 +2,9 @@
 
 [ext_resource type="Theme" uid="uid://13hqji670cr3" path="res://default_theme.tres" id="1_w560x"]
 [ext_resource type="Script" path="res://view/score.gd" id="2_dpd10"]
-[ext_resource type="Texture2D" uid="uid://dmvnpa2dht7l3" path="res://assets/images/paper.png" id="3_4kqyp"]
+[ext_resource type="Texture2D" uid="uid://bwyeh5vt3ggcw" path="res://assets/images/paper.png" id="3_4kqyp"]
 [ext_resource type="PackedScene" uid="uid://csjdwovq2kw7g" path="res://view/card.tscn" id="3_yj46n"]
-[ext_resource type="Texture2D" uid="uid://ccseqldymijh3" path="res://assets/images/scissors.png" id="4_aunfo"]
+[ext_resource type="Texture2D" uid="uid://b73bnnyla7m24" path="res://assets/images/scissors.png" id="4_aunfo"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_fkv1x"]
 device = -1
